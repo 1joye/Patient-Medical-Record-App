@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Medical Record System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="https://www.co-createafrica.org/wp-content/uploads/2024/06/hunewlogo.jpg" alt="Hospital Logo" class="logo">
+                <h1>Patient Medical Record App <br>For CHMS Students at HU</h1>
+            </div>
+            <div class="patient-id">
+                <div class="form-group">
+                    <label for="patientID">Patient MRN:</label>
+                    <input type="text" id="patientID" placeholder="Enter patient MRN">
+                    <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+                </div>
+                <button id="newPatientBtn"><i class="fas fa-user-plus"></i> New Patient</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="demographics">Demographics</button>
+                <button class="tab-btn" data-tab="complaints">Chief Complaints</button>
+                <button class="tab-btn" data-tab="history">History</button>
+                <button class="tab-btn" data-tab="social">Social History</button>
+                <button class="tab-btn" data-tab="physical">Physical Exam</button>
+                <button class="tab-btn" data-tab="lab">Lab Investigations</button>
+                <button class="tab-btn" data-tab="diagnosis">Diagnosis</button>
+                <button class="tab-btn" data-tab="medications">Medications</button>
+                <button class="tab-btn" data-tab="procedures">Procedures</button>
+            </div>
+
+            <div class="tab-content active" id="demographics">
+                <h2>Demographic Data</h2>
+                <form id="demographicsForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" required>
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" rows="2"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="maritalStatus">Marital Status</label>
+                            <select id="maritalStatus">
+                                <option value="">Select</option>
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+                                <option value="divorced">Divorced</option>
+                                <option value="widowed">Widowed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="occupation">Occupation</label>
+                            <input type="text" id="occupation">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="emergencyContact">Emergency Contact</label>
+                        <div class="emergency-contact">
+                            <input type="text" id="emergencyName" placeholder="Name">
+                            <input type="tel" id="emergencyPhone" placeholder="Phone">
+                            <input type="text" id="emergencyRelation" placeholder="Relationship">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Demographics</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-content" id="complaints">
+                <h2>Chief Complaints</h2>
+                <form id="complaintsForm">
+                    <div class="form-group">
+                        <label for="chiefComplaint">Primary Complaint</label>
+                        <textarea id="chiefComplaint" rows="2" placeholder="Describe the main reason for visit" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="complaintDuration">Duration of Complaint</label>
+                        <input type="text" id="complaintDuration" placeholder="e.g., 3 days, 2 weeks" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="complaintSeverity">Severity</label>
+                        <select id="complaintSeverity" required>
+                            <option value="">Select severity</option>
+                            <option value="mild">Mild</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="severe">Severe</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Complaints</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-content" id="history">
+                <h2>History of Present Illness</h2>
+                <form id="historyForm">
+                    <div class="form-group">
+                        <label for="illnessOnset">Onset of Illness</label>
+                        <textarea id="illnessOnset" rows="2" placeholder="How did the illness begin?"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="illnessCourse">Course of Illness</label>
+                        <textarea id="illnessCourse" rows="2" placeholder="How has the illness progressed?"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="aggravatingFactors">Aggravating Factors</label>
+                        <textarea id="aggravatingFactors" rows="2" placeholder="What makes it worse?"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="relievingFactors">Relieving Factors</label>
+                        <textarea id="relievingFactors" rows="2" placeholder="What makes it better?"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="previousTreatments">Previous Treatments</label>
+                        <textarea id="previousTreatments" rows="2" placeholder="Any treatments tried?"></textarea>
+                    </div>
+                    
+                    <h3>Review of Systems</h3>
+                    <div class="system-review">
+                        <div class="system-category">
+                            <h4>General</h4>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="feverHistory" value="fever">
+                                    <label for="feverHistory">Fever</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="weightLoss" value="weightLoss">
+                                    <label for="weightLoss">Weight Loss</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="fatigueHistory" value="fatigue">
+                                    <label for="fatigueHistory">Fatigue</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="system-category">
+                            <h4>Cardiovascular</h4>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="chestPain" value="chestPain">
+                                    <label for="chestPain">Chest Pain</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="palpitations" value="palpitations">
+                                    <label for="palpitations">Palpitations</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="swelling" value="swelling">
+                                    <label for="swelling">Swelling</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="system-category">
+                            <h4>Respiratory</h4>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cough" value="cough">
+                                    <label for="cough">Cough</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="shortnessBreath" value="shortnessBreath">
+                                    <label for="shortnessBreath">Shortness of Breath</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="wheezing" value="wheezing">
+                                    <label for="wheezing">Wheezing</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="system-category">
+                            <h4>Gastrointestinal</h4>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="nauseaHistory" value="nausea">
+                                    <label for="nauseaHistory">Nausea/Vomiting</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="diarrhea" value="diarrhea">
+                                    <label for="diarrhea">Diarrhea</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="constipation" value="constipation">
+                                    <label for="constipation">Constipation</label>
+                                </div>
+                            </div>
+                        </div>
+                         
+                        <div class="system-category">
+                            <h4>Genitourinary</h4>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="Painful urination" value="Painful urination">
+                                    <label for="Painful urination">Painful urination</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="diarrhea" value="diarrhea">
+                                    <label for="diarrhea">Flank pain</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="changes in urine color" value="changes in urine color">
+                                    <label for="changes in urine color">changes in urine color</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="system-category">
+                            <h4>Musculoskeletal</h4>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="Joint pain" value="Jointpain">
+                                    <label for="Joint pain">Joint pain</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="muscleweakness" value="muscleweakness">
+                                    <label for="muscle weakness">muscle weakness</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="swelling" value="swelling">
+                                    <label for="swelling">Swelling in Extremity</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="system-category">
+                            <h4>Integumentary</h4>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="Rashes" value="Rashes">
+                                    <label for="Rashes">Rashes</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="itching" value="itching">
+                                    <label for="itching">Itching</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="skin lesion" value="skin lesion">
+                                    <label for="skin lesion">Skin lesion</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="breast pain" value="breast pain">
+                                    <label for="breast pain">Breast pain</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="system-category">
+                            <h4>Neurological</h4>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="Headaches" value="Headaches">
+                                    <label for="Headaches">Headaches</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="seizures" value="seizures">
+                                    <label for="seizures">seizures</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="dizziness" value="dizziness">
+                                    <label for="dizziness">Dizziness</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="change in coordination" value="change in coordination">
+                                    <label for="change in coordination">change in coordination</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="system-category">
+                            <h4>Endocrine</h4>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="DM" value="DM">
+                                    <label for="DM">DM</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="Tyroid disease" value="Tyroid disease">
+                                    <label for="Tyroid disease">Tyroid disease</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="intolerance to heat and cold" value="intolerance to heat and cold">
+                                    <label for="intolerance to heat and cold">intolerance to heat and cold</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>Past Medical History</h3>
+                    <div class="form-group">
+                        <label for="pastMedicalHistory">Conditions</label>
+                        <textarea id="pastMedicalHistory" rows="3" placeholder="List any past medical conditions"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pastSurgeries">Surgeries</label>
+                        <textarea id="pastSurgeries" rows="2" placeholder="List any past surgeries"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="Medications">Medications</label>
+                        <textarea id="Medications" rows="2" placeholder="List any past medications"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="allergies">Allergies</label>
+                        <textarea id="allergies" rows="2" placeholder="List any allergies"></textarea>
+                    </div>
+                    
+                    <h3>Family History</h3>
+                    <div class="form-group">
+                        <label for="familyHistory">Family Medical History</label>
+                        <textarea id="familyHistory" rows="3" placeholder="List any relevant family medical history"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save History</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-content" id="social">
+                <h2>Social History</h2>
+                <form id="socialForm">
+                    <div class="form-group">
+                        <label for="tobaccoUse">Tobacco Use</label>
+                        <select id="tobaccoUse">
+                            <option value="">Select</option>
+                            <option value="never">Never</option>
+                            <option value="former">Former</option>
+                            <option value="current">Current</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="tobaccoDetailsGroup" style="display: none;">
+                        <label for="tobaccoDetails">Tobacco Details</label>
+                        <input type="text" id="tobaccoDetails" placeholder="Type, amount, duration">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="alcoholUse">Alcohol Use</label>
+                        <select id="alcoholUse">
+                            <option value="">Select</option>
+                            <option value="never">Never</option>
+                            <option value="occasional">Occasional</option>
+                            <option value="regular">Regular</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="alcoholDetailsGroup" style="display: none;">
+                        <label for="alcoholDetails">Alcohol Details</label>
+                        <input type="text" id="alcoholDetails" placeholder="Type, amount, frequency">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="drugUse">Recreational Drug Use</label>
+                        <select id="drugUse">
+                            <option value="">Select</option>
+                            <option value="never">Never</option>
+                            <option value="former">Former</option>
+                            <option value="current">Current</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="drugDetailsGroup" style="display: none;">
+                        <label for="drugDetails">Drug Details</label>
+                        <input type="text" id="drugDetails" placeholder="Type, frequency, duration">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="occupationalHazards">Occupational Hazards</label>
+                        <textarea id="occupationalHazards" rows="2" placeholder="Any occupational exposures or hazards"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="livingSituation">Living Situation</label>
+                        <textarea id="livingSituation" rows="2" placeholder="Describe living conditions"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dietExercise">Diet & Exercise</label>
+                        <textarea id="dietExercise" rows="2" placeholder="Describe diet and exercise habits"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Social History</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-content" id="physical">
+                <h2>Physical Examination</h2>
+                <form id="physicalForm">
+                    <div class="vital-signs">
+                        <h3>Vital Signs</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bloodPressure">Blood Pressure</label>
+                                <input type="text" id="bloodPressure" placeholder="e.g., 120/80">
+                            </div>
+                            <div class="form-group">
+                                <label for="heartRate">Heart Rate</label>
+                                <input type="number" id="heartRate" placeholder="bpm">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="respiratoryRate">Respiratory Rate</label>
+                                <input type="number" id="respiratoryRate" placeholder="breaths/min">
+                            </div>
+                            <div class="form-group">
+                                <label for="temperature">Temperature</label>
+                                <input type="text" id="temperature" placeholder="°F or °C">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="oxygenSaturation">Oxygen Saturation</label>
+                                <input type="number" id="oxygenSaturation" placeholder="%">
+                            </div>
+                            <div class="form-group">
+                                <label for="height">Height</label>
+                                <input type="text" id="height" placeholder="cm or in">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="weight">Weight</label>
+                                <input type="text" id="weight" placeholder="kg or lbs">
+                            </div>
+                            <div class="form-group">
+                                <label for="bmi">BMI</label>
+                                <input type="text" id="bmi" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="physical-exam-sections">
+                        <div class="exam-section">
+                            <h3>General Appearance</h3>
+                            <div class="form-group">
+                                <textarea id="generalAppearance" rows="2" placeholder="General appearance notes"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="exam-section">
+                            <h3>Head, Eyes, Ears, Nose, Throat (HEENT)</h3>
+                            <div class="form-group">
+                                <textarea id="heentExam" rows="2" placeholder="HEENT examination findings"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="exam-section">
+                            <h3>Neck</h3>
+                            <div class="form-group">
+                                <textarea id="neckExam" rows="2" placeholder="Neck examination findings"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="exam-section">
+                            <h3>Cardiovascular</h3>
+                            <div class="form-group">
+                                <textarea id="cardioExam" rows="2" placeholder="Cardiovascular examination findings"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="exam-section">
+                            <h3>Respiratory</h3>
+                            <div class="form-group">
+                                <textarea id="respExam" rows="2" placeholder="Respiratory examination findings"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="exam-section">
+                            <h3>Abdomen</h3>
+                            <div class="form-group">
+                                <textarea id="abdominalExam" rows="2" placeholder="Abdominal examination findings"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="exam-section">
+                            <h3>Extremities</h3>
+                            <div class="form-group">
+                                <textarea id="extremitiesExam" rows="2" placeholder="Extremities examination findings"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="exam-section">
+                            <h3>Neurological</h3>
+                            <div class="form-group">
+                                <textarea id="neuroExam" rows="2" placeholder="Neurological examination findings"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="exam-section">
+                            <h3>Skin</h3>
+                            <div class="form-group">
+                                <textarea id="skinExam" rows="2" placeholder="Skin examination findings"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Physical Exam</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-content" id="lab">
+                <h2>Laboratory Investigations</h2>
+                <form id="labForm">
+                    <div class="form-group">
+                        <label for="labTestsOrdered">Tests Ordered</label>
+                        <textarea id="labTestsOrdered" rows="3" placeholder="List all laboratory tests ordered"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="labResults">Results</label>
+                        <textarea id="labResults" rows="5" placeholder="Enter laboratory results"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="labDate">Date Collected</label>
+                        <input type="date" id="labDate">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Lab Data</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-content" id="diagnosis">
+                <h2>Diagnostic Findings</h2>
+                <form id="diagnosisForm">
+                    <div class="form-group">
+                        <label for="primaryDiagnosis">Primary Diagnosis</label>
+                        <input type="text" id="primaryDiagnosis" placeholder="Enter primary diagnosis">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="secondaryDiagnoses">Secondary Diagnoses</label>
+                        <textarea id="secondaryDiagnoses" rows="3" placeholder="Enter secondary diagnoses (one per line)"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="diagnosisNotes">Clinical Notes</label>
+                        <textarea id="diagnosisNotes" rows="5" placeholder="Additional diagnostic notes"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Diagnosis</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-content" id="medications">
+                <h2>Medications</h2>
+                <form id="medicationsForm">
+                    <div class="medication-entry">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="medicationName">Medication Name</label>
+                                <input type="text" id="medicationName" placeholder="e.g., Amoxicillin">
+                            </div>
+                            <div class="form-group">
+                                <label for="medicationDosage">Dosage</label>
+                                <input type="text" id="medicationDosage" placeholder="e.g., 500mg">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="medicationFrequency">Frequency</label>
+                                <input type="text" id="medicationFrequency" placeholder="e.g., BID">
+                            </div>
+                            <div class="form-group">
+                                <label for="medicationRoute">Route</label>
+                                <select id="medicationRoute">
+                                    <option value="oral">Oral</option>
+                                    <option value="iv">IV</option>
+                                    <option value="im">IM</option>
+                                    <option value="sc">Subcutaneous</option>
+                                    <option value="topical">Topical</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="medicationStartDate">Start Date</label>
+                                <input type="date" id="medicationStartDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="medicationEndDate">End Date</label>
+                                <input type="date" id="medicationEndDate">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="medicationIndication">Indication</label>
+                            <input type="text" id="medicationIndication" placeholder="Reason for medication">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="medicationNotes">Notes</label>
+                            <textarea id="medicationNotes" rows="2" placeholder="Additional notes"></textarea>
+                        </div>
+                        
+                        <div class="medication-actions">
+                            <button type="button" class="add-med-btn" id="addMedicationBtn">Add Another Medication</button>
+                        </div>
+                    </div>
+                    
+                    <div id="additionalMedications"></div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Medications</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-content" id="procedures">
+                <h2>Procedures</h2>
+                <form id="proceduresForm">
+                    <div class="procedure-entry">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="procedureName">Procedure Name</label>
+                                <input type="text" id="procedureName" placeholder="e.g., Appendectomy">
+                            </div>
+                            <div class="form-group">
+                                <label for="procedureDate">Date</label>
+                                <input type="date" id="procedureDate">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="procedureDescription">Description</label>
+                            <textarea id="procedureDescription" rows="3" placeholder="Procedure description"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="procedureIndication">Indication</label>
+                            <input type="text" id="procedureIndication" placeholder="Reason for procedure">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="procedureOutcome">Outcome</label>
+                                <select id="procedureOutcome">
+                                    <option value="successful">Successful</option>
+                                    <option value="complications">With Complications</option>
+                                    <option value="unsuccessful">Unsuccessful</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="procedureProvider">Provider</label>
+                                <input type="text" id="procedureProvider" placeholder="Who performed the procedure">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="procedureNotes">Notes</label>
+                            <textarea id="procedureNotes" rows="2" placeholder="Additional notes"></textarea>
+                        </div>
+                        
+                        <div class="procedure-actions">
+                            <button type="button" class="add-procedure-btn" id="addProcedureBtn">Add Another Procedure</button>
+                        </div>
+                    </div>
+                    
+                    <div id="additionalProcedures"></div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Procedures</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+            <div class="summary-actions">
+                <button id="summaryBtn"><i class="fas fa-file-medical"></i> Generate Summary</button>
+                <button id="printBtn"><i class="fas fa-print"></i> Print Record</button>
+                <button id="saveAllBtn"><i class="fas fa-save"></i> Save All</button>
+            </div>
+            <p class="copyright">© 2025 Hospital Management System. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <div class="modal" id="summaryModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Patient Medical Summary</h2>
+            <div id="summaryContent"></div>
+            <div class="modal-actions">
+                <button id="printSummaryBtn"><i class="fas fa-print"></i> Print Summary</button>
+                <button id="closeSummaryBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
